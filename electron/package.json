@@ -1,0 +1,22 @@
+{
+  "name": "electron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^23.1.0",
+    "electron-rebuild": "^3.2.9"
+  },
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "node-fetch": "^2.6.1",
+    "robotjs": "^0.6.0"
+  }
+}

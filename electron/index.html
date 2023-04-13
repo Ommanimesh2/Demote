@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shutdown App</title>
+  </head>
+  <body>
+    <h1>Shutdown App</h1>
+    <p>Click the button to shutdown the computer:</p>
+    <button id="shutdown-button">Shutdown</button>
+    <button id="lock-button">Lock</button>
+    <button id="bluetooth-button">Bluetooth</button>
+    <button id="volume-button-up">+</button>
+    <button id="volume-button-down">-</button>
+    <button id="volume-button-mute">mute</button>
+    <button id="show-tasks">showtasks</button>
+    <button id="show-req-tasks">showtasks</button>
+    <button id="kill-task">kill</button>
+    <div id="task-list" style="height: auto"></div>
+    <div id="task-list-req" style="height: auto"></div>
+    <script>
+      const { ipcRenderer } = require("electron");
+
+      // When the button is clicked, send a message to the main process to shutdown the computer
+      document
+        .getElementById("shutdown-button")
+        .addEventListener("click", () => {
+          ipcRenderer.send("shutdown");
+        });
+      document.getElementById("lock-button").addEventListener("click", () => {
+        ipcRenderer.send("lock");
+      });
+      document
+        .getElementById("bluetooth-button")
+        .addEventListener("click", () => {
+          ipcRenderer.send("turn-on-bluetooth");
+        });
+      document
+        .getElementById("volume-button-up")
+        .addEventListener("click", () => {
+          ipcRenderer.send("volume-up");
+        });
+      document
+        .getElementById("volume-button-down")
+        .addEventListener("click", () => {
+          ipcRenderer.send("volume-down");
+        });
+      document.getElementById("kill-task").addEventListener("click", () => {
+        id = 21448;
+        ipcRenderer.send("kill-task", `${id}`);
+      });
+      
+      document
+        .getElementById("volume-button-mute")
+        .addEventListener("click", () => {
+          ipcRenderer.send("volume-mute");
+        });
+      document.getElementById("show-tasks").addEventListener("click", () => {
+        ipcRenderer.send("tasks-list");
+      });
+      document
+        .getElementById("show-req-tasks")
+        .addEventListener("click", () => {
+          ipcRenderer.send("task-list-req-processes");
+        });
+      ipcRenderer.on("get-tasks-reply", (event, tasks) => {
+        const taskList = document.getElementById("task-list");
+        tasks.forEach((task) => {
+          const div = document.createElement("div");
+          div.innerHTML = task;
+          taskList.appendChild(div);
+        });
+      });
+      ipcRenderer.on("get-req-tasks-reply", (event, tasks) => {
+        const taskList = document.getElementById("task-list-req");
+        tasks.forEach((task) => {
+          // const div= document.createElement("div");
+          // div.innerHTML=task;
+          // taskList.appendChild(div)
+          console.log(task);
+        });
+      });
+    </script>
+  </body>
+</html>
