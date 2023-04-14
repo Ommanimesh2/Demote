@@ -33,6 +33,8 @@ let back = false;
 let play = false;
 let next = false;
 let prev = false;
+let refresh = false;
+let kill = 'null';
 
 var serviceAccount = require("./demote-91d58-firebase-adminsdk-5v9wv-2e81f26f46.json");
 
@@ -266,30 +268,51 @@ function createWindow() {
   });
 }
 
-app.whenReady().then(async () => {
-  try {
-    si.processes().then((data) => {
-      let processes = [];
-      data.list.forEach((process) => {
-        //update processes array
-        var index = processes.findIndex((el) => el.name === process.name);
-        // process = process.map(el => el.name === item.name ? item : el);
-        let p = {
+function updateProcesses() {
+  let processes = [];
+  si.processes().then((data) => {
+    data.list.forEach((process) => {
+      //update processes array
+      var index = processes.findIndex((el) => el.name === process.name);
+      let p = {
+        name: process.name,
+        pid: process.pid,
+      };
+      if (index !== -1) {
+        processes.slice(index, 1, p);
+      } else {
+        processes.push({
           name: process.name,
           pid: process.pid,
-        };
-        if (index !== -1) {
-          p.mem = p.mem + processes[index].mem;
-          processes.slice(index,1,p);
-        } else {
-          processes.push({
-            name: process.name,
-            pid: process.pid,
-          });
-        }
-      });
+        });
+      }
     });
     const doc = db
+      .collection("USERS")
+      .doc("9Mcu0QPA6kXBNQcfnv4o")
+      .collection("DEVICES")
+      .doc("pUjCYwqeY8u7EXYQnoYT");
+    doc
+      .update({
+        processes: processes,
+      })
+      .then(() => {
+        doc.get().then((doc) => {
+          if (doc.exists) {
+            console.log(doc.data());
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        });
+      });
+  });
+}
+
+app.whenReady().then(async () => {
+  try {
+    updateProcesses();
+        const doc = db
       .collection("USERS")
       .doc("9Mcu0QPA6kXBNQcfnv4o")
       .collection("DEVICES")
@@ -306,6 +329,7 @@ app.whenReady().then(async () => {
         play = docSnapshot._fieldsProto.play.booleanValue;
         next = docSnapshot._fieldsProto.next.booleanValue;
         previous = docSnapshot._fieldsProto.prev.booleanValue;
+        kill = docSnapshot._fieldsProto.kill.stringValue
 
         if (lock) {
           db.collection("USERS")
@@ -390,7 +414,7 @@ app.whenReady().then(async () => {
             .doc("pUjCYwqeY8u7EXYQnoYT")
             .update({ next: false })
             .then(() => {
-              robot.keyTap("n",'shift');
+              robot.keyTap("n", "shift");
             });
         } else if (prev) {
           db.collection("USERS")
@@ -399,9 +423,31 @@ app.whenReady().then(async () => {
             .doc("pUjCYwqeY8u7EXYQnoYT")
             .update({ prev: false })
             .then(() => {
-              robot.keyTap("p",'shift');
+              robot.keyTap("p", "shift");
             });
-        } else {
+        } else if (refresh) {
+          db.collection("USERS")
+            .doc("9Mcu0QPA6kXBNQcfnv4o")
+            .collection("DEVICES")
+            .doc("pUjCYwqeY8u7EXYQnoYT")
+            .update({ refresh: false })
+            .then(() => {
+              updateProcesses();
+            });
+        } else if (kill!='null') {
+          let pid = kill;
+          db.collection("USERS")
+            .doc("9Mcu0QPA6kXBNQcfnv4o")
+            .collection("DEVICES")
+            .doc("pUjCYwqeY8u7EXYQnoYT")
+            .update({ kill: 'null' })
+            .then(() => {
+              require("child_process").exec(`taskkill /F /PID ${pid}`);
+            }).then(()=>{
+              updateProcesses();
+            });
+        } 
+        else {
           console.log("lock is not true");
         }
       },
