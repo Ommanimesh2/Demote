@@ -16,6 +16,8 @@
   },
   "dependencies": {
     "child_process": "^1.0.2",
+    "firebase": "^9.19.1",
+    "firebase-admin": "^11.6.0",
     "node-fetch": "^2.6.1",
     "robotjs": "^0.6.0"
   }
