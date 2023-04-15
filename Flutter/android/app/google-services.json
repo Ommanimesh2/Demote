@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1021231368408",
+    "firebase_url": "https://demote-91d58-default-rtdb.firebaseio.com",
+    "project_id": "demote-91d58",
+    "storage_bucket": "demote-91d58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021231368408:android:409707e63e6f22409f2fad",
+        "android_client_info": {
+          "package_name": "com.example.desktop_controller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021231368408-48mpqrgugsm0porl39hcf6qe18bs62bq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUCXCiltqkqwabzh61u_MfeMLl1_pp-jQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021231368408-48mpqrgugsm0porl39hcf6qe18bs62bq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
