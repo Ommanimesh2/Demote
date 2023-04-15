@@ -19,6 +19,7 @@
     "firebase": "^9.19.1",
     "firebase-admin": "^11.6.0",
     "node-fetch": "^2.6.1",
-    "robotjs": "^0.6.0"
+    "robotjs": "^0.6.0",
+    "systeminformation": "^5.17.12"
   }
 }

@@ -1,0 +1,128 @@
+body {
+    background-image: url("./assets/back.png");
+    background-size: cover;
+    overflow-y: hidden;
+  }
+
+.body-container{
+margin: 0;
+overflow-y: hidden;
+}
+.header{
+    margin-top: 5vh;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ text-align: center;   
+color: aliceblue;
+}
+.header h1{
+    font-size: 38px;
+}
+.main-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10%;
+    margin-left: 41%;
+    width: 18%;
+}
+.input{
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+   text-align: center;
+   height: 6vh;
+    box-sizing: border-box;
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: #0066cc;
+    box-shadow: 0 0 5px #0066cc;
+  }
+#unique-number{
+    margin-top: 4%;
+    width: 70%;
+    margin-left: 15%;
+    display: inline-block;
+    height: 5vh;
+    text-align: center;
+    border-radius: 5px;
+    border: none;
+    background-color: #0077cc;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+#unique-number:hover {
+    background-color: #005fa3;
+    transform: translateY(-2px);
+}
+#afterdiv{
+    margin-top: -26vh;
+    display: none;
+    align-items: center;
+    font-size: 16px;
+    justify-content: center;
+    text-align: center;   
+   color: aliceblue;
+}
+
+#afterdiv h1{
+    width: 20vw;
+margin-left: 38vw;
+    border: 2px solid #4CAF50; 
+     font-size: 20px;
+    color: rgb(5, 104, 53);
+    padding: 10px;
+    text-align: center;
+}
+
+
+.google-btn {
+    width: 184px;
+    height: 42px;
+    background-color:#4285f4;
+    border-radius: 2px;
+    box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
+}
+  .google-icon-wrapper {
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    background-color:  #fff;
+  }
+  .google-icon {
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 11px;
+    width: 18px;
+    height: 18px;
+  }
+  .btn-text {
+    float: right;
+    margin: 11px 11px 0 0;
+    color: "white";
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-family: "Roboto";
+  }
+  .google-btn:hover {
+    box-shadow: 0 0 6px "blue";
+  }
+  .google-btn:active {
+    background: #1669F2;
+  }
